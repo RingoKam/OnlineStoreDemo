@@ -25,10 +25,7 @@ namespace online_web_store_demo.Controllers
             string userhash = User.Identity.GetUserId();
             ShoppingCartModel vm;
 
-            if (Session[userhash] == null)
-            {
-                Session[userhash] = _shoppingCartRepo.GetActiveShoppingCartId(userhash);
-            }
+            Session[userhash] = _shoppingCartRepo.GetActiveShoppingCartId(userhash);
 
             var cartId = Convert.ToInt32(Session[userhash]);
             vm = _shoppingCartRepo.GetShoppingCartByCartid(cartId);

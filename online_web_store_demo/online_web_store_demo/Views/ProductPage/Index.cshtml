@@ -40,12 +40,12 @@
             });
 
             promise.done(function (data) {
-                alert("Added item in cart. Total item in cart: " + data);
+                if (data.Message) {
+                    alert(data.Message + "Please make sure you are logged in.");
+                } else {
+                    alert("Added item in cart. Total item in cart: " + data);
+                }
             });
-            
-            promise.catch(function () {
-                alert("Sorry service is not available! Please try again later")
-            })
         });
     </script>
 }
