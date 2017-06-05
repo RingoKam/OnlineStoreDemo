@@ -1,0 +1,65 @@
+﻿@model online_web_store_demo_model.ShoppingCartModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>CheckOut</h2>
+
+@using (Html.BeginForm("CheckOut", "ShoppingCart", FormMethod.Post))
+{
+    @Html.HiddenFor(model => Model.Id)
+    <table class="table">
+        <tr>
+            <th>
+                Item
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price ($)
+            </th>
+        </tr>
+
+        @foreach (var item in Model.CartContent)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ThumbNail" class="img-thumbnail float-left" alt="Alternate Text" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>@Model.CartContent.Sum(content => content.Qty)</td>
+            <td>@Model.CartContent.Sum(content => content.Qty * content.Price)</td>
+        </tr>
+    </table>
+
+    <div class="pull-right">
+        <input type="submit" value="CheckOut" class="btn" />
+    </div>
+}
+
+

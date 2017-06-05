@@ -1,0 +1,51 @@
+﻿@model IEnumerable<online_web_store_demo_model.ProductModel>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="panel col-md-3" data-desc="@item.Description">
+            <div class="panel-body">
+                <div class="thumbnail">
+                    <img class="media-object" src="@item.ThumbNail" alt="@item.Description" />
+                </div>
+                <div class="product-name text-center">@item.Name</div>
+                <div class="text-center">
+                    <span class="glyphicon glyphicon-tags"> $@item.Price</span>
+                </div>
+                <div class="text-center">
+                    <input class="button add-to-cart" data-id="@item.Id" type="button" value="Add to Cart" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="add-to-cart-url" data-add-to-cart="@Url.Action("UpdateCart", "ShoppingCart")"></div>
+
+@section Scripts {
+    <script>
+        $(".add-to-cart").click(function () {
+            var url = "/api" + $("#add-to-cart-url").data("add-to-cart") + "/?productId=" + $(this).data('id') + "&qty=1";
+            console.log($(this).data('id'));
+            var promise = $.ajax({
+                type: "POST",
+                url: url,
+                data: { productId: $(this).data('id'), qty: 1},
+            });
+
+            promise.done(function (data) {
+                alert("Added item in cart. Total item in cart: " + data);
+            });
+            
+            promise.catch(function () {
+                alert("Sorry service is not available! Please try again later")
+            })
+        });
+    </script>
+}
