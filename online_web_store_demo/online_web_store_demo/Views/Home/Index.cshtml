@@ -1,12 +1,26 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>Web Online Store</h1>
-    <p class="lead">Buy Stuff </p>
-    <p><a href="@Url.Action("Index", "ProductPage")" class="btn btn-primary btn-lg">Start Shopping!</a></p>
-</div>
-
-<div id="add-to-cart-url" data-add-to-cart="@Url.Action("UpdateCart", "ShoppingCart")"></div>
-<div id="get-cart-url" data-add-to-cart="@Url.Action("GetCart", "ShoppingCart")"></div>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ringo Gallery Web Store SPA</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <app-root>Loading...</app-root>
+    <div id="urls"
+         data-get-cart="@Url.Action("GetCart", "ShoppingCart")"
+         data-update-cart="@Url.Action("UpdateCart", "ShoppingCart")"
+         data-checkout-cart="@Url.Action("Checkout", "ShoppingCart")"
+         data-get-product="@Url.Action("GetAllProducts", "Products")"></div>
+    <script type="text/javascript" src="~/dist/inline.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/polyfills.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/styles.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/vendor.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/main.bundle.js"></script>    
+</body>
+</html>

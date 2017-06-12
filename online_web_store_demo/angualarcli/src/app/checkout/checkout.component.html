@@ -1,0 +1,35 @@
+<md-grid-list cols="2">
+  <md-grid-tile [colspan]=1>
+    <md-list *ngIf="shoppingCartService.apiCart.cartContent && shoppingCartService.apiCart.cartContent.length > 0; else elseBlock">
+      <h3 md-subheader>Cart</h3>
+      <md-list-item *ngFor="let item of shoppingCartService.apiCart.cartContent">
+        <img md-list-avatar [src]="item.thumbNail" alt="item.name">
+        <h3 md-line> {{item.name}} </h3>
+        <p md-line>
+          <span> {{item.description}} </span>
+        </p>
+        <div md-line>
+          <span>${{item.price}}</span>
+          <span>Qty: {{item.qty}}</span>
+        </div>
+      </md-list-item>
+    </md-list>
+    <ng-template #elseBlock>
+      <md-list>
+        <md-list-item>
+          <h3 md-line>No Item In Cart</h3>
+        </md-list-item>
+      </md-list>
+    </ng-template>
+  </md-grid-tile>
+  <md-grid-tile class="checkout" [colspan]=1>
+    <h1>
+      Total: ${{shoppingCartService.cartTotal}}
+    </h1>
+    <h1>
+      <button md-button color="primary" (click)="checkOut()">
+        Checkout
+      </button>
+    </h1>
+  </md-grid-tile>
+</md-grid-list>

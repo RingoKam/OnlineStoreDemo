@@ -8,6 +8,7 @@ namespace online_web_store_demo.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();

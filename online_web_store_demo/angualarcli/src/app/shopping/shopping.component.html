@@ -1,0 +1,23 @@
+{{ cart | json }}
+
+<md-card *ngFor="let product of ProductList; let i = index" class="shopping-card">
+  <a>
+    <img md-card-image [src]="product.thumbNail">
+  </a>
+  <md-card-content>
+    <div class="description">
+      {{product.description}}
+    </div>
+    <div class="name">
+      {{product.name}}
+    </div>
+    <div class="price">
+      ${{product.price}}
+    </div>
+  </md-card-content>
+  <md-card-actions class="card-actions">
+    <div>
+      <button md-button color="primary" (click)="this.AddToCart(ProductList[i])">Add To Cart</button>
+    </div>
+  </md-card-actions>
+</md-card>
